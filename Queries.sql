@@ -62,7 +62,6 @@ ORDER BY last_name
 
 --List each employee in the Sales department, including their employee number, 
 --last name, and first name.
-
 SELECT e.emp_no as "Employee Number",  
 e.last_name as "Last Name", 
 e.first_name as "First Name"
@@ -92,7 +91,8 @@ ORDER BY e.last_name, e.first_name
 
 --List the frequency counts, in descending order, of all the employee last names 
 --(that is, how many employees share each last name).
-SELECT last_name as "Last Name", count(last_name) as "Count"
+SELECT last_name as "Last Name",
+COUNT(last_name) as "Count"
 FROM employees
 GROUP BY last_name
 ORDER BY "Count" DESC
