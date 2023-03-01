@@ -7,7 +7,7 @@
 
 ### The six CSV files in folder "data" were read into PostgreSQL tables which were created with script "Schema.sql" and then analyzed in "Queries.sql".
 ### "ERD" picture of table relationships was created using QuickDBD.
-### Analysis in Jupyter notebook SQL-Data-Modeling-Engineering-Analysis.ipynb and also listed below.
+### Analysis in "Jupyter notebook SQL-Data-Modeling-Engineering-Analysis.ipynb" and also shown below.
 
 ## Analysis
 
