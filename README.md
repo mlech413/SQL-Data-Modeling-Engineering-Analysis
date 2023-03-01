@@ -8,8 +8,7 @@
 
 ## Analysis
 ###1. List the employee number, last name, first name, sex, and salary of each employee.
-
-Two table join resulting in 300,024 rows returned:
+###Two table join resulting in 300,024 rows returned:
 
 SELECT e.emp_no as "Employee Number", 
 
