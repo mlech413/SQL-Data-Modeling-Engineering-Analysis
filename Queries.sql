@@ -56,7 +56,7 @@ last_name as "Last Name",
 sex as "Sex"
 FROM employees
 WHERE first_name = 'Hercules'
-AND last_name like 'H%'
+AND last_name like 'B%'
 ORDER BY last_name
 ;
 
