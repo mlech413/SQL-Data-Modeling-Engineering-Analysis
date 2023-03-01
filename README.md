@@ -7,6 +7,7 @@
 
 ### The six CSV files in folder "data" were read into PostgreSQL tables which were created with script "Schema.sql" and then analyzed in "Queries.sql".
 ### "ERD" picture of table relationships was created using QuickDBD.
+### Analysis in Jupyter notebook SQL-Data-Modeling-Engineering-Analysis.ipynb and also listed below.
 
 ## Analysis
 
@@ -24,7 +25,7 @@ INNER JOIN salaries as s
 ON e.emp_no = s.emp_no  
 ORDER BY e.last_name  
 ;  
-Output: output_csv/1 Employee  Salaries.csv
+Output: output_csv/1_employee_salaries.csv
 
 ### 2. First name, last name, and hire date for the employees who were hired in 1986.
 
@@ -36,7 +37,7 @@ hire_date as "Hire Date"
 FROM employees  
 WHERE DATE_PART('y', hire_date) = '1996'  
 ;  
-Output: output_csv/2 Employees Hired in 1986.csv
+Output: output_csv/2_employees_hired_1986.csv
 
 ### 3. Manager of each department along with their department number, department name, employee number, last name, and first name.
 
@@ -55,7 +56,7 @@ INNER JOIN employees as e
 ON dm.emp_no = e.emp_no  
 ORDER BY d.dept_name, e.last_name, e.first_name  
 ;  
-Output: output_csv/3 Managers.csv
+Output: output_csv/3_managers.csv
 
 ### 4. Department number for each employee along with that employee’s employee number, last name, first name, and department name.
 
@@ -73,7 +74,7 @@ INNER JOIN employees as e
 ON de.emp_no = e.emp_no  
 ORDER BY d.dept_no  
 ;  
-Output: output_csv/4 Dept Num and Employees.csv
+Output: output_csv/4_dept_num_and_employees.csv
 ### 5. First name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
 
 ### Single table query with 20 rows returned: 
@@ -86,7 +87,7 @@ WHERE first_name = 'Hercules'
 AND last_name like 'B%'  
 ORDER BY last_name  
 ;  
-Output: output_csv/5 Emps Named Hercules, B.csv
+Output: output_csv/5_emps_named_Hercules_B.csv
 
 ### 6. Each employee in the Sales department, including their employee number, last name, and first name.
 
@@ -103,7 +104,7 @@ ON de.emp_no = e.emp_no
 WHERE d.dept_name = 'Sales'  
 ORDER BY e.last_name, e.first_name  
 ;  
-Output: output_csv/6 Sales Dept.csv
+Output: output_csv/6_sales_dept.csv
 
 ### 7. Each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
 
@@ -121,7 +122,7 @@ ON de.emp_no = e.emp_no
 WHERE d.dept_name IN ('Sales', 'Development')  
 ORDER BY e.last_name, e.first_name  
 ;  
-Output: output_csv/7 Sales and Development Depts.csv
+Output: output_csv/7_sales_and_development_depts.csv
 
 ### 8. Frequency counts, in descending order, of all the employee last names.
 
@@ -133,4 +134,4 @@ FROM employees
 GROUP BY last_name  
 ORDER BY "Count" DESC  
 ;  
-Output: output_csv/8 Counts of Last Names.csv
+Output: output_csv/8_last_name_frequency.csv
