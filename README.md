@@ -1,14 +1,19 @@
 # SQL Data Modeling/Engineering/Analysis
 ## Overview
-### Research of people employed at a fictional company Pewlett Hackard during the 1980s and 1990s. Six tables were designed to hold the data from the CSV files, imported the CSV files into a PostgreSQL database, and then questions answered about the data through SQL queries.
+
+### Research of people employed at a fictional company Pewlett Hackard during the 1980s and 1990s. Six tables were designed to hold the data from the CSV files, imported the CSV files into a PostgreSQL database, and then questions answered about the data with SQL queries.
+
 ### Performed data modeling, data engineering, and data analysis, respectively.
 
 ### The six CSV files in folder "data" were read into PostgreSQL tables which were created with script "Schema.sql" and then analyzed in "Queries.sql".
 ### "ERD" picture of table relationships was created using QuickDBD.
 
 ## Analysis
-### 1. List the employee number, last name, first name, sex, and salary of each employee.
+
+### 1. Employee number, last name, first name, sex, and salary of each employee.
+
 ### Two table join resulting in 300,024 rows returned:
+
 SELECT e.emp_no as "Employee Number", 
 e.last_name as "Last Name",  
 e.first_name as "First Name",  
@@ -19,3 +24,113 @@ INNER JOIN salaries as s
 ON e.emp_no = s.emp_no  
 ORDER BY e.last_name  
 ;  
+Output: output_csv/1 Employee  Salaries.csv
+
+### 2. First name, last name, and hire date for the employees who were hired in 1986.
+
+### Single table query with 9,574 rows returned:
+
+SELECT first_name as "First Name",  
+last_name as "Last Name",  
+hire_date as "Hire Date"  
+FROM employees  
+WHERE DATE_PART('y', hire_date) = '1996'  
+;  
+Output: output_csv/2 Employees Hired in 1986.csv
+
+### 3. Manager of each department along with their department number, department name, employee number, last name, and first name.
+
+### Three table join resulting in 24 rows returned:
+
+SELECT concat(e.first_name, ' ', e.last_name) AS "Manager",  
+d.dept_no as "Manager Department Number",  
+d.dept_name as "Department Name",  
+e.emp_no as "Employee Number",  
+e.last_name as "Last Name",  
+e.first_name as "First Name"  
+FROM dept_manager as dm  
+INNER JOIN departments as d  
+ON dm.dept_no = d.dept_no  
+INNER JOIN employees as e  
+ON dm.emp_no = e.emp_no  
+ORDER BY d.dept_name, e.last_name, e.first_name  
+;  
+Output: output_csv/3 Managers.csv
+
+### 4. Department number for each employee along with that employee’s employee number, last name, first name, and department name.
+
+### Three table join resulting in 331,603 rows returned:
+
+SELECT d.dept_no as "Department Number",  
+d.dept_name as "Department Name",  
+de.emp_no as "Employee Number",  
+e.last_name as "Last Name",  
+e.first_name as "First Name"  
+FROM departments as d  
+INNER JOIN dept_emp as de  
+ON d.dept_no = de.dept_no  
+INNER JOIN employees as e  
+ON de.emp_no = e.emp_no  
+ORDER BY d.dept_no  
+;  
+Output: output_csv/4 Dept Num and Employees.csv
+### 5. First name, last name, and sex of each employee whose first name is Hercules and whose last name begins with the letter B.
+
+### Single table query with 20 rows returned: 
+
+SELECT first_name as "First Name",  
+last_name as "Last Name",  
+sex as "Sex"  
+FROM employees  
+WHERE first_name = 'Hercules'  
+AND last_name like 'B%'  
+ORDER BY last_name  
+;  
+Output: output_csv/5 Emps Named Hercules, B.csv
+
+### 6. Each employee in the Sales department, including their employee number, last name, and first name.
+
+### Three table join resulting in 52,245 rows returned:
+
+SELECT e.emp_no as "Employee Number",  
+e.last_name as "Last Name",  
+e.first_name as "First Name"  
+FROM departments as d  
+INNER JOIN dept_emp as de  
+ON d.dept_no = de.dept_no  
+INNER JOIN employees as e  
+ON de.emp_no = e.emp_no  
+WHERE d.dept_name = 'Sales'  
+ORDER BY e.last_name, e.first_name  
+;  
+Output: output_csv/6 Sales Dept.csv
+
+### 7. Each employee in the Sales and Development departments, including their employee number, last name, first name, and department name.
+
+### Three table join resulting in 137,952 rows returned:
+
+SELECT e.emp_no as "Employee Number",  
+e.last_name as "Last Name",  
+e.first_name as "First Name",  
+d.dept_name as "Department"  
+FROM departments as d  
+INNER JOIN dept_emp as de  
+ON d.dept_no = de.dept_no  
+INNER JOIN employees as e  
+ON de.emp_no = e.emp_no  
+WHERE d.dept_name IN ('Sales', 'Development')  
+ORDER BY e.last_name, e.first_name  
+;  
+Output: output_csv/7 Sales and Development Depts.csv
+
+### 8. Frequency counts, in descending order, of all the employee last names.
+
+### Single table query with 1,638 rows returned: 
+
+SELECT last_name as "Last Name",  
+COUNT(last_name) as "Count"  
+FROM employees  
+GROUP BY last_name  
+ORDER BY "Count" DESC  
+;  
+Output: output_csv/8 Counts of Last Names.csv
