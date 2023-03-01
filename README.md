@@ -1,7 +1,7 @@
 # SQL Data Modeling/Engineering/Analysis
 ## Overview
 
-### Research of people employed at a fictional company Pewlett Hackard during the 1980s and 1990s. Six tables were designed to hold the data from the CSV files, imported the CSV files into a PostgreSQL database, and then questions answered about the data with SQL queries.
+### Research of people employed at a fictional company Pewlett Hackard during the 1980s and 1990s. Six tables were designed to hold the data from the CSV files, imported the CSV files into a PostgreSQL database, and analyzed with 8 SQL queries.
 
 ### Performed data modeling, data engineering, and data analysis, respectively.
 
